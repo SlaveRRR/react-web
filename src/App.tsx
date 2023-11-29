@@ -17,6 +17,12 @@ interface DataType {
   eyeColor:string ;
 }
 
+interface Respone {
+  users:DataType[];
+  total:number;
+  skip:number;
+  limit:number;
+}
 
 
 const columns: ColumnsType<DataType> = [
@@ -81,10 +87,12 @@ const App: FC = () => {
   const [isLoading,setLoading] = useState<boolean>(false)
   const getData = async (offset : number,limit:number)  =>{ 
     setLoading(true)
-    const response = await axios.get(`https://dummyjson.com/users?limit=10&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
+    const response = await axios.get<Respone>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
+
     const {data:{users}} = response;
-    console.log(response)
+    
     setDataSource(users)
+
     setLoading(false)
    
   }
@@ -96,9 +104,9 @@ const App: FC = () => {
     <>
       <Table dataSource={dataSource} columns={columns} loading={isLoading} pagination={false} />
       <Flex gap="middle" justify='center'>
-        <button onClick={() => setOffset(offset - 10)} disabled={offset == 0}>Назад</button>
-        <p>{offset === 0 ? 1 : (offset/10) + 1}</p>
-        <button disabled={offset == 90} onClick={() => setOffset(offset + 10)}>Вперёд</button>
+        <button onClick={() => setOffset(offset - LIMIT)} disabled={offset == 0}>Назад</button>
+        <p>{offset === 0 ? 1 : (offset/LIMIT) + 1}</p>
+        <button disabled={offset == 90} onClick={() => setOffset(offset + LIMIT)}>Вперёд</button>
       </Flex>
 
     </>
