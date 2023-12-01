@@ -17,7 +17,7 @@ interface IUser {
   eyeColor:string ;
 }
 
-interface ResponeUsers {
+interface ResponseUsers {
   users:IUser[];
   total:number;
   skip:number;
@@ -90,7 +90,7 @@ const App: FC = () => {
     const offset = page === 0 ? 0 : page * 10
 
     setLoading(true)
-    const response = await axios.get<ResponeUsers>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
+    const response = await axios.get<ResponseUsers>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
     
     const {data:{users}} = response;
    
