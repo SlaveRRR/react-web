@@ -87,13 +87,13 @@ const App: FC = () => {
   const [isLoading,setLoading] = useState<boolean>(false)
   const getData = async (page : number,limit:number)  =>{
     
-    const offset = page === 0 ? 0 : page * 10
+    const offset = page * 10
 
     setLoading(true)
     const response = await axios.get<ResponseUsers>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
     
     const {data:{users}} = response;
-   
+    console.log(users)
     setDataSource(users)
 
     setLoading(false)
