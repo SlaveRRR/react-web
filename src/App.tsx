@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const LIMIT = 10
 
-interface DataType {
+interface IUser {
   id: number;
   key: React.Key;
   username: string;
@@ -17,15 +17,15 @@ interface DataType {
   eyeColor:string ;
 }
 
-interface Respone {
-  users:DataType[];
+interface ResponseUsers {
+  users:IUser[];
   total:number;
   skip:number;
   limit:number;
 }
 
 
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<IUser> = [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -82,31 +82,34 @@ const columns: ColumnsType<DataType> = [
 
 const App: FC = () => {
 
-  const [offset, setOffset] = useState<number>(0)
-  const [dataSource, setDataSource] = useState<DataType[]>();
+  const [page, setPage] = useState<number>(0)
+  const [dataSource, setDataSource] = useState<IUser[]>();
   const [isLoading,setLoading] = useState<boolean>(false)
-  const getData = async (offset : number,limit:number)  =>{ 
-    setLoading(true)
-    const response = await axios.get<Respone>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
-
-    const {data:{users}} = response;
+  const getData = async (page : number,limit:number)  =>{
     
+    const offset = page * 10
+
+    setLoading(true)
+    const response = await axios.get<ResponseUsers>(`https://dummyjson.com/users?limit=${limit}&skip=${offset}&select=username,age,id,gender,eyeColor,address`)
+    
+    const {data:{users}} = response;
+    console.log(users)
     setDataSource(users)
 
     setLoading(false)
    
   }
   useEffect(() =>{
-    getData(offset,LIMIT)
-  },[offset])
+    getData(page,LIMIT)
+  },[page])
 
   return (
     <>
       <Table dataSource={dataSource} columns={columns} loading={isLoading} pagination={false} />
       <Flex gap="middle" justify='center'>
-        <button onClick={() => setOffset(offset - LIMIT)} disabled={offset == 0}>Назад</button>
-        <p>{offset === 0 ? 1 : (offset/LIMIT) + 1}</p>
-        <button disabled={offset == 90} onClick={() => setOffset(offset + LIMIT)}>Вперёд</button>
+        <button onClick={() => setPage(page - 1)} disabled={page == 0}>Назад</button>
+        <p>{page + 1}</p>
+        <button disabled={page == 9} onClick={() => setPage(page + 1)}>Вперёд</button>
       </Flex>
 
     </>
