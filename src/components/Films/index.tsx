@@ -84,13 +84,20 @@ const columns: ColumnsType<IFilm> = [
 ];
 
 
-
+interface IPages{
+    page:number;
+    maxPages:number;
+}
 
 const Films: FC = () => {
 
-  const [page, setPage] = useState<number>(1)
+  const [pages, setPages] = useState<IPages>({
+    page:1,
+    maxPages:10
+  })
   const [dataSource, setDataSource] = useState<IFilm[]>();
   const [isLoading, setLoading] = useState<boolean>(false)
+
   const getData = async (page: number, limit: number) => {
 
   
@@ -106,12 +113,14 @@ const Films: FC = () => {
     })
   
     const { data: { docs:films } } = response;
- 
+    
     setDataSource(films)
 
     setLoading(false)
 
   }
+  const {page,maxPages} = pages
+  
   useEffect(() => {
     getData(page, LIMIT)
   }, [page])
@@ -120,9 +129,9 @@ const Films: FC = () => {
     <>
       <Table  dataSource={dataSource} columns={columns} loading={isLoading} pagination={false} />
       <Flex gap="middle" justify='center'>
-        <button onClick={() => setPage(page - 1)} disabled={page == 1}>Назад</button>
+        <button onClick={() => setPages({...pages,page: page - 1})} disabled={page === 1}>Назад</button>
         <p>{page}</p>
-        <button disabled={page == 9} onClick={() => setPage(page + 1)}>Вперёд</button>
+        <button disabled={page === maxPages } onClick={() => setPages({...pages,page: page + 1})}>Вперёд</button>
       </Flex>
 
 

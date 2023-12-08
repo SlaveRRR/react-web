@@ -23,7 +23,7 @@ const NavBar: FC = () => {
             icon: <UserOutlined />,
         },
         {
-            label: <Link to={NEWS}>Posts</Link>,
+            label: <Link to={NEWS}>News</Link>,
             key: 'news',
         },
         {
@@ -36,7 +36,7 @@ const NavBar: FC = () => {
             marginBottom: '2em',
             display: 'flex',
             justifyContent: 'space-between',
-        }} mode="horizontal" inlineCollapsed={false} forceSubMenuRender={false} defaultSelectedKeys={["home"]} items={items} />
+        }} mode="horizontal"  defaultSelectedKeys={["home"]} items={items} />
     )
 
 }
