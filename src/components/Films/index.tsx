@@ -12,6 +12,8 @@ import { HeartTwoTone } from '@ant-design/icons'
 const LIMIT = 10
 const apiUrl = ' https://api.kinopoisk.dev/v1.4/'
 
+const maxPage = 100
+
 const {Title} = Typography
 
 interface IFilm {
@@ -28,7 +30,7 @@ interface IFilm {
   year:number;
 }
 
-interface ResponseFimls{
+interface ResponseFilms{
   docs: IFilm[];
   limit:number;
   page:number;
@@ -84,17 +86,11 @@ const columns: ColumnsType<IFilm> = [
 ];
 
 
-interface IPages{
-    page:number;
-    maxPages:number;
-}
+
 
 const Films: FC = () => {
 
-  const [pages, setPages] = useState<IPages>({
-    page:1,
-    maxPages:10
-  })
+  const [page, setPage] = useState<number>(1)
   const [dataSource, setDataSource] = useState<IFilm[]>();
   const [isLoading, setLoading] = useState<boolean>(false)
 
@@ -105,7 +101,7 @@ const Films: FC = () => {
     setLoading(true)
 
    
-    const response = await axios.get<ResponseFimls>(`${apiUrl}movie?page=${page}&limit=${limit}&selectFields=id&selectFields=name&selectFields=year&selectFields=shortDescription&selectFields=movieLength&selectFields=poster&selectFields=rating&selectFields=genres&selectFields=releaseYears&type=movie&sortField=votes.kp&sortType=-1`, {
+    const response = await axios.get<ResponseFilms>(`${apiUrl}movie?page=${page}&limit=${limit}&selectFields=id&selectFields=name&selectFields=year&selectFields=shortDescription&selectFields=movieLength&selectFields=poster&selectFields=rating&selectFields=genres&selectFields=releaseYears&type=movie&sortField=votes.kp&sortType=-1`, {
       headers: {
         "X-API-KEY": "Q1KQG8F-X2K4TP2-N3Y4TEM-G0TY6S7",
         'Content-Type': "application/json"
@@ -119,7 +115,7 @@ const Films: FC = () => {
     setLoading(false)
 
   }
-  const {page,maxPages} = pages
+  
   
   useEffect(() => {
     getData(page, LIMIT)
@@ -129,9 +125,9 @@ const Films: FC = () => {
     <>
       <Table  dataSource={dataSource} columns={columns} loading={isLoading} pagination={false} />
       <Flex gap="middle" justify='center'>
-        <button onClick={() => setPages({...pages,page: page - 1})} disabled={page === 1}>Назад</button>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>Назад</button>
         <p>{page}</p>
-        <button disabled={page === maxPages } onClick={() => setPages({...pages,page: page + 1})}>Вперёд</button>
+        <button disabled={page === maxPage } onClick={() => setPage(page + 1)}>Вперёд</button>
       </Flex>
 
 

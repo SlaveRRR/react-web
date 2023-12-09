@@ -27,7 +27,7 @@ const NavBar: FC = () => {
             key: 'news',
         },
         {
-            label: <Button onClick={() => setIsAuth(!isAuth)}>{isAuth ? 'Выйти' : 'Войти'}</Button>,
+            label: <Button onClick={() => setIsAuth(prev => !prev)}>{isAuth ? 'Выйти' : 'Войти'}</Button>,
             key: 'auth',
         },
     ]
