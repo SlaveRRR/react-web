@@ -1,17 +1,24 @@
 
-import React,{FC} from 'react'
-import {Typography} from 'antd'
-const { Title, Paragraph } = Typography;
+import React, { FC } from 'react'
+import { Typography as antdTypography } from 'antd'
+import styled from 'styled-components';
+const { Title, Paragraph } = antdTypography;
 
+const Typography = styled(antdTypography)`
+    text-align: center;
+`
 
-const Home : FC = () => {
+const Home: FC = () => {
     return (
-        <Typography>
-            <Title>Welcome to Filmix</Title>
-            <Paragraph>
-                Online cinema without ads
-            </Paragraph>
-        </Typography>
+        <div className="container">
+            <Typography>
+                <Title>Welcome to Filmix</Title>
+                <Paragraph>
+                    Online cinema without ads
+                </Paragraph>
+            </Typography>
+        </div>
+
     )
 }
 

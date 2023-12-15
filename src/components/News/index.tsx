@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Card, Skeleton, Avatar } from 'antd'
+import { Card, Skeleton, Avatar, Flex } from 'antd'
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 
 
@@ -32,25 +32,30 @@ const News: FC = () => {
         },
     ]
     return (
-        <>
-            {items.map(({title,description }) => {
-                return <Card
-                    style={{ width: 300, marginTop: 16 }}
-                    actions={[
-                        <LikeOutlined key="like" />,
-                        <DislikeOutlined key="dislike" />,
-                    ]}
-                >
-                    <Skeleton loading={isLoading} avatar active>
-                        <Meta
-                            avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />}
-                            title={title}
-                            description={description}
-                        />
-                    </Skeleton>
-                </Card>
-            })}
-        </>
+        <div className="container">
+            <Flex vertical align='center'>
+                {items.map(({ title, description }) => {
+                    return <Card
+                        style={{ width: 300, marginTop: 16 }}
+                        actions={[
+                            <LikeOutlined key="like" />,
+                            <DislikeOutlined key="dislike" />,
+                        ]}
+                    >
+                        <Skeleton loading={isLoading} avatar active>
+                            <Meta
+                                avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />}
+                                title={title}
+                                description={description}
+                            />
+                        </Skeleton>
+                    </Card>
+                })}
+            </Flex>
+
+
+        </div>
+
 
 
     )
