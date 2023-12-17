@@ -2,8 +2,13 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
 import { useAuth } from '../../hooks/useAuth';
+import styled from 'styled-components';
 
-const { Text } = Typography;
+const { Title:antdTitle } = Typography;
+
+const Title = styled(antdTitle)`
+        text-align: center;
+`
 
 type Props = {
     children: React.ReactNode,
@@ -11,7 +16,7 @@ type Props = {
 
 const RequiredAuth: FC<Props> = ({ children }) => {
     const { isAuth } = useAuth()
-    return isAuth ? children : <Text type="danger">Authorized only!</Text>
+    return isAuth ? children : <Title   type="danger">Authorized only!</Title>
 }
 
 export default RequiredAuth
