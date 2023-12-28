@@ -7,6 +7,7 @@ import {FilmsPage,HomePage,NewsPage,ProfilePage} from '../../pages'
 import RequiredAuth from '../../components/RequiredAuth';
 
 
+
 const MainRouter : FC = () => {
   const resultPaths: RouteObject[] = [
     { path: HOME, element: <HomePage />,},
