@@ -1,33 +1,28 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Card, Skeleton, Avatar, Flex, Button as antdButton } from 'antd'
+import { Card, Skeleton, Avatar, Flex,Image } from 'antd'
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 import CreateNew from '../CreateNew';
-import styled from 'styled-components';
-import { INew } from '../../types/news';
-
-const Button = styled(antdButton)`
-    margin-bottom:1em;
-`
+import {Button,Container} from './style'
+import { INew } from './types';
 
 const { Meta } = Card
 
-const Container = styled('div')`
-    padding-top:.5em;
-    background-color:white;
-`
 
 const arr: INew[] = [
     {
         username: 'alex',
-        comment: 'news text'
+        comment: 'news text',
+        picture:"https://www.spcdn.org/blog/wp-content/uploads/2021/01/cover-12-1110x420.png"
     },
     {
         username: 'oleg',
-        comment: 'news text'
+        comment: 'news text',
+        picture:"https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
     },
     {
         username: 'alina',
-        comment: 'news text'
+        comment: 'news text',
+        picture:"https://www.rgo.ru/sites/default/files/styles/head_image_article/public/node/61549/photo-2023-11-08-150058.jpeg?itok=2Z42QgJa"
     },
 ]
 
@@ -47,10 +42,28 @@ const News: FC = () => {
 
             <Flex vertical align='center'>
                 <Button onClick={() => setVisible(prev => !prev)}>{isVisible ? 'Hide form' : 'Show form'}</Button>
-                {isVisible && <CreateNew setItems={setItems} />}
-                {items.map(({ username, comment }) => {
+                {isVisible && <CreateNew items={items} setItems={setItems} />}
+                {items.map(({ username, comment, picture }) => {
                     return <Card
+                    key={username}
                         style={{ width: 300, marginTop: 16 }}
+                        cover={
+                            isLoading ? 
+                            <Skeleton.Image active={isLoading} style={{
+                                width:'300px',
+                                height:'180px'
+                            }} />
+                            :
+                            <Image
+                            alt="post image"
+                            src={picture}
+                            height={180} style={{
+                                width: '100%',
+                                objectFit: 'cover',
+                                objectPosition:'center'
+                              }}
+                          />
+                          }
                         actions={[
                             <LikeOutlined key="like" />,
                             <DislikeOutlined key="dislike" />,

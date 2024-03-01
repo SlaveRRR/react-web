@@ -2,5 +2,6 @@ import {useContext} from 'react'
 import { ctx } from '../context'
 
 export const useAuth = () =>{
-    return useContext(ctx)
+    const {isAuth,setIsAuth} = useContext(ctx);
+    return {isAuth,setIsAuth}
 }
