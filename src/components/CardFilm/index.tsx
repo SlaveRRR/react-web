@@ -4,13 +4,13 @@ import { Image } from "antd";
 import { Card,Meta } from "./styles";
 
 
+interface ICardFilmProps {
+  film: IFilm
+}
 
 
-type Props = {
-  film: IFilm;
-};
 
-const CardFilm: FC<Props> = ({
+const CardFilm: FC<ICardFilmProps> = ({
   film: { name, poster, shortDescription },
 }) => {
   return (

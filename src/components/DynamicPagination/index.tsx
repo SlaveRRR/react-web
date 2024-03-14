@@ -59,7 +59,6 @@ const DymanicPagination: FC = () => {
 
   useEffect(() => {
      if (inView) { 
-        setIsLoading(true)
         setPage((prev) => prev + 1) 
     }
     }, [inView]);
