@@ -11,7 +11,7 @@ import GlobalStyles from './global-styles';
 const App: FC = () => {
 
   const {theme} = useContext(ctx)
-console.log(theme)
+
   return (
 
     <>
