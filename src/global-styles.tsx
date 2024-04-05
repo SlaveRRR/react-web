@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 interface StyledProps {
-    mode: 'light' | 'dark'
+   mode: "light" | "dark";
 }
 //
 
@@ -11,13 +11,13 @@ const GlobalStyles = createGlobalStyle<StyledProps>`
 }
 
 :root{
-    --main-border:${({ mode }) => mode === 'light' ? '1px solid rgb(0 0 0 / 20%)' : '1px solid white'};
-    --theme-bg:${({ mode }) => mode === 'light' ? 'white' : 'black'};
-    --theme-text-color:${({mode}) => mode === 'dark' ? 'white' : 'black'};
-    --table-content-bg:${({mode}) => mode === 'dark' ? '#636363' : 'white'};
-    --table-header-bg:${({mode}) => mode === 'dark' ? '#8b8b8b' : '#fafafa'};
-    --table-outline:${({mode}) => mode === 'dark' ? '2px solid white' : 'none'};   
-    --table-cell-hover-color:${({mode}) => mode === 'dark' ? '#8b8a8a' : '#fafafa'}; 
+    --main-border:${({ mode }) => (mode === "light" ? "1px solid rgb(0 0 0 / 20%)" : "1px solid white")};
+    --theme-bg:${({ mode }) => (mode === "light" ? "white" : "black")};
+    --theme-text-color:${({ mode }) => (mode === "dark" ? "white" : "black")};
+    --table-content-bg:${({ mode }) => (mode === "dark" ? "#636363" : "white")};
+    --table-header-bg:${({ mode }) => (mode === "dark" ? "#8b8b8b" : "#fafafa")};
+    --table-outline:${({ mode }) => (mode === "dark" ? "2px solid white" : "none")};   
+    --table-cell-hover-color:${({ mode }) => (mode === "dark" ? "#8b8a8a" : "#fafafa")}; 
 }
     body{
         background-color: var(--theme-bg)
@@ -30,5 +30,5 @@ const GlobalStyles = createGlobalStyle<StyledProps>`
   padding-left: 0.9375em;
   padding-right: 0.9375em;
 }
-`
+`;
 export default GlobalStyles;
