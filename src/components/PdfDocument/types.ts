@@ -1,5 +1,5 @@
-export interface IDocument{
-    username: string;
-    comment: string;
-    picture:string;
+export interface IDocument {
+   username: string;
+   comment: string;
+   picture: string;
 }

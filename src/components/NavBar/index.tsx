@@ -44,8 +44,8 @@ const Button = styled(antdButton)`
 const NavBar: FC = () => {
    const { isAuth, setIsAuth } = useAuth();
 
-   const [toggleTheme] = useTheme();
-
+   const [theme, toggleTheme] = useTheme();
+   console.log(toggleTheme);
    const items = [
       {
          label: <Link to={HOME}>Home</Link>,
