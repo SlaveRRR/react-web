@@ -1,10 +1,8 @@
-import React,{FC} from 'react'
-import News from '../../components/News'
+import React, { FC } from "react";
+import News from "../../components/News";
 
+const NewsPage: FC = () => {
+   return <News />;
+};
 
-
-const NewsPage : FC = () => {
-  return <News/>
-}
-
-export default NewsPage
+export default NewsPage;

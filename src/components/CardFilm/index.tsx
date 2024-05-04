@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { IFilm } from "../../types/films";
+import { IFilm } from "../FilmsTable/types";
 import { Image } from "antd";
 import { Card, Meta } from "./styles";
 

@@ -11,11 +11,13 @@
       "prettify": "prettier --write './src/**/*.{js,json,jsx,ts,tsx,css}'",
       "test": "vitest",
       "test-coverage": "vitest --coverage",
-      "test-ui": "vitest --ui"
+      "test-ui": "vitest --ui",
+      "prepare": "husky install"
    },
    "dependencies": {
       "@ant-design/icons": "^5.2.6",
       "@react-pdf/renderer": "^3.3.8",
+      "@tanstack/react-query": "^5.29.2",
       "antd": "^5.11.3",
       "axios": "^1.6.2",
       "lint-staged": "^15.2.2",
@@ -49,16 +51,19 @@
       "eslint-plugin-react": "^7.34.0",
       "eslint-plugin-react-hooks": "^4.6.0",
       "eslint-plugin-react-refresh": "^0.4.4",
+      "husky": "^8.0.0",
       "jsdom": "^24.0.0",
       "prettier": "^3.2.5",
       "typescript": "^5.2.2",
       "vite": "^5.0.0",
+      "vite-plugin-pwa": "^0.19.8",
       "vitest": "^1.4.0"
    },
    "lint-staged": {
       "./src/**/*.{js,json,jsx,ts,tsx,css}": [
-         "prettify",
-         "eslint --fix"
+         "yarn prettify",
+         "eslint --fix",
+         "git add"
       ]
    }
 }

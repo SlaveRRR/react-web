@@ -30,6 +30,8 @@ module.exports = {
       "@typescript-eslint/consistent-type-imports": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/consistent-type-assertions": "off",
+      "@typescript-eslint/no-confusing-void-expression": "off",
+      "@typescript-eslint/no-unused-vars": "off",
    },
    ignorePatterns: [".eslintrc.cjs", "vite.config.ts"],
 };

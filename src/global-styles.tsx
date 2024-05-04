@@ -17,7 +17,8 @@ const GlobalStyles = createGlobalStyle<StyledProps>`
     --table-content-bg:${({ mode }) => (mode === "dark" ? "#636363" : "white")};
     --table-header-bg:${({ mode }) => (mode === "dark" ? "#8b8b8b" : "#fafafa")};
     --table-outline:${({ mode }) => (mode === "dark" ? "2px solid white" : "none")};   
-    --table-cell-hover-color:${({ mode }) => (mode === "dark" ? "#8b8a8a" : "#fafafa")}; 
+    --table-cell-hover-color:${({ mode }) => (mode === "dark" ? "#8b8a8a" : "#fafafa")};
+    --menu-bg:${({ mode }) => (mode === "dark" ? "#8b8a8a" : "white")};
 }
     body{
         background-color: var(--theme-bg)
@@ -29,6 +30,12 @@ const GlobalStyles = createGlobalStyle<StyledProps>`
   width: 100%;
   padding-left: 0.9375em;
   padding-right: 0.9375em;
+}
+.ant-menu-submenu-popup.ant-menu-submenu{
+background:var(--menu-bg);
+}
+.ant-menu-light.ant-menu-submenu>.ant-menu{
+    background:var(--menu-bg);
 }
 `;
 export default GlobalStyles;

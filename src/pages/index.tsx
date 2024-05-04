@@ -3,4 +3,4 @@ import HomePage from "./home";
 import NewsPage from "./news";
 import ProfilePage from "./profile";
 
-export {HomePage,NewsPage,ProfilePage,FilmsPage}
+export { HomePage, NewsPage, ProfilePage, FilmsPage };
