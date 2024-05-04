@@ -6,7 +6,7 @@ import { IFilm } from "./types";
 import type { ColumnsType } from "antd/es/table";
 import { Title, Button, Flex, Image, Space, Table, Text } from "./styles";
 
-const LIMIT = 10;
+const LIMIT = 12;
 
 const maxPage = 100;
 

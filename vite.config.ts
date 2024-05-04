@@ -7,10 +7,22 @@ export default defineConfig({
    plugins: [
       react(),
       VitePWA({
-         registerType: "autoUpdate",
+         registerType: "prompt",
          workbox: {
             globPatterns: ["**/*"],
             maximumFileSizeToCacheInBytes: 2621440,
+            runtimeCaching: [
+               {
+                  urlPattern: ({ url }) => url.href.includes("kinopoisk"),
+                  handler: "CacheFirst" as const,
+                  options: {
+                     cacheName: "cache-kinopoisk",
+                     cacheableResponse: {
+                        statuses: [200],
+                     },
+                  },
+               },
+            ],
          },
          includeAssets: [
             "favicon.ico",
