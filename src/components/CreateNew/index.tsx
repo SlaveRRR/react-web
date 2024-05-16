@@ -1,19 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
-
 import { SubmitHandler, useForm } from "react-hook-form";
-
-import { Form as antdForm, Button, Flex, Progress, Typography } from "antd";
-
 import PdfDocument from "../PdfDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-
-import { Form, Input } from "./style";
+import { Form, Input, Button, Flex, Item, Progress, Text, Title } from "./styles";
 
 import { IForm } from "./types";
 import { INew } from "../News/types";
-
-const { Item } = antdForm;
-const { Text, Title } = Typography;
 
 interface Props {
    setItems: React.Dispatch<React.SetStateAction<INew[]>>;
