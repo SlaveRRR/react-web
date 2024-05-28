@@ -38,7 +38,7 @@ const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
       if (localStorage.getItem("token")) {
          checkAuth();
       }
-   });
+   }, []);
    return <ctx.Provider value={{ isAuth, setIsAuth, theme, setTheme }}>{children}</ctx.Provider>;
 };
 

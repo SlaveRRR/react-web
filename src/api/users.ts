@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
    return config;
 });
 
-api.interceptors.request.use(
+api.interceptors.response.use(
    (config) => {
       return config;
    },
