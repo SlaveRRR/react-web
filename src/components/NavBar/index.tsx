@@ -1,51 +1,25 @@
 import React, { FC } from "react";
-import { Button as antdButton, Menu as antdMenu, Switch as antdSwitch } from "antd";
-import { Link } from "react-router-dom";
-import { FILMS, HOME, PROFILE, NEWS } from "../../app/routing/config";
+import { Link, useNavigate } from "react-router-dom";
+import { FILMS, HOME, PROFILE, NEWS, SIGNIN } from "../../app/routing/config";
 import { useAuth } from "../../hooks/useAuth";
 import { useTheme } from "../../hooks/useTheme";
 import { UserOutlined } from "@ant-design/icons";
-import styled from "styled-components";
-
-const Switch = styled(antdSwitch)`
-   &.ant-switch {
-      outline: var(--main-border);
-      background: var(--theme-bg);
-      outline-offset: 1px;
-   }
-   &.ant-switch.ant-switch-checked {
-      background: black;
-      &:hover {
-         background: #aaa7a7;
-      }
-   }
-   &.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
-      margin-top: -26px;
-   }
-`;
-
-const Menu = styled(antdMenu)`
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 2em;
-   &::before,
-   &::after {
-      display: none;
-   }
-   transition: background-color 0.8s;
-`;
-
-const Button = styled(antdButton)`
-   color: var(--theme-text-color);
-   background: var(--theme-bg);
-   border: var(--main-border);
-`;
+import { Button, Menu, Switch } from "./styles";
+import { usersApi } from "@/api/users";
 
 const NavBar: FC = () => {
    const { isAuth, setIsAuth } = useAuth();
-
+   const navigate = useNavigate();
    const [theme, toggleTheme] = useTheme();
-   console.log(toggleTheme);
+   const logout = async () => {
+      try {
+         await usersApi.logout();
+         setIsAuth(false);
+         navigate(SIGNIN);
+      } catch (error) {
+         alert(error);
+      }
+   };
    const items = [
       {
          label: <Link to={HOME}>Home</Link>,
@@ -89,7 +63,7 @@ const NavBar: FC = () => {
       },
       {
          label: (
-            <Button data-testid="auth-btn" onClick={() => setIsAuth((prev) => !prev)}>
+            <Button data-testid="auth-btn" onClick={async () => (isAuth ? await logout() : navigate(SIGNIN))}>
                {isAuth ? "Выйти" : "Войти"}
             </Button>
          ),

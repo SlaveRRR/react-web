@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ctx } from "../context";
 import { ITheme } from "../types/theme";
+import { usersApi } from "@/api/users";
 
 interface ContextProviderProps {
    children: React.ReactNode;
@@ -8,6 +9,13 @@ interface ContextProviderProps {
 
 const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
    const [isAuth, setIsAuth] = useState<boolean>(false);
+   const checkAuth = async () => {
+      const response = await usersApi.checkAuth();
+      if (response.status === 200) {
+         localStorage.setItem("token", response.headers.authorization);
+         setIsAuth(true);
+      }
+   };
    const [theme, setTheme] = useState<ITheme>({
       mode: "light",
       Menu: {
@@ -26,7 +34,11 @@ const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
          colorTextDescription: "rgba(0, 0, 0, 0.45)",
       },
    });
-
+   useEffect(() => {
+      if (localStorage.getItem("token")) {
+         checkAuth();
+      }
+   }, []);
    return <ctx.Provider value={{ isAuth, setIsAuth, theme, setTheme }}>{children}</ctx.Provider>;
 };
 
