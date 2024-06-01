@@ -4,6 +4,7 @@ import * as path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+   base: "react-web",
    plugins: [
       react(),
       VitePWA({
